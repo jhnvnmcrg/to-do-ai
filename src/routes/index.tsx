@@ -1,14 +1,21 @@
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/')({ component: Home })
+import { createFileRoute } from '@tanstack/react-router';
+import TodoForm from '@/components/TodoForm';
+import TodoList from '@/components/TodoList';
 
 function Home() {
-  return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">Welcome to TanStack Start</h1>
-      <p className="mt-4 text-lg">
-        Edit <code>src/routes/index.tsx</code> to get started.
-      </p>
-    </div>
-  )
+    return (
+        <main className='mx-auto max-w-4xl p-10'>
+            <h1 className='mb-8 text-4xl font-bold'>AI Todo App</h1>
+
+            <TodoForm />
+
+            <div className='mt-10'>
+                <TodoList />
+            </div>
+        </main>
+    );
 }
+
+export const Route = createFileRoute('/')({
+    component: Home
+});

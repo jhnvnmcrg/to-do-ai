@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabase';
-import { CreateTodo, UpdateTodo } from '../types/todo';
+import type { CreateTodo, UpdateTodo } from '../types/todo';
 
 /**
  * READ ALL TODOS
