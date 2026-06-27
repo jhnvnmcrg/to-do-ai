@@ -4,7 +4,7 @@ import TodoList from '@/components/TodoList';
 
 function Home() {
     return (
-        <main className='mx-auto max-w-4xl p-10'>
+        <main className='flex-col justify-center items-center text-center mx-auto max-w-4xl p-10'>
             <h1 className='mb-8 text-4xl font-bold'>AI Todo App</h1>
 
             <TodoForm />
