@@ -47,7 +47,11 @@ export default function TodoCard({ todo }: Props) {
                 {todo.title}
             </CardTitle>
 
-            <CardContent className='text-wrap'>
+            <CardContent
+                className={
+                    todo.is_completed ? 'line-through text-wrap' : 'text-wrap'
+                }
+            >
                 <p>{todo.description}</p>
             </CardContent>
 
