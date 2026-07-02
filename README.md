@@ -1,265 +1,267 @@
-Welcome to your new TanStack Start app! 
+🤖 AI-Powered To-Do List
 
-# Getting Started
+An AI-powered To-Do List application built with TanStack Start, Supabase, TanStack AI, and Google Gemini. This project demonstrates modern full-stack web development by combining CRUD operations, real-time database updates, and AI-assisted task management.
 
-To run this application:
+---
 
-```bash
+📖 Project Overview
+
+This application allows users to manage their daily tasks through both a traditional graphical interface and a conversational AI assistant.
+
+Instead of manually interacting with forms, users can communicate with the AI using natural language, such as:
+
+- "Create a High priority task called Finish Thesis."
+- "How many tasks do I have?"
+- "Show my completed tasks."
+- "Mark Study React as completed."
+- "Delete my Exercise task."
+
+The AI understands the user's request, uses TanStack AI tool calling, and performs the appropriate CRUD operation on the Supabase database.
+
+---
+
+✨ Features
+
+📋 Task Management (CRUD)
+
+- Create new tasks
+- View all tasks
+- Edit existing tasks
+- Delete tasks
+- Mark tasks as completed or pending
+- Assign task priorities (Low, Medium, High)
+
+🤖 AI Assistant
+
+Powered by Google Gemini through TanStack AI.
+
+The AI can:
+
+- Create tasks
+- Update tasks
+- Delete tasks
+- Display all tasks
+- Count completed tasks
+- Count pending tasks
+- Suggest priorities
+- Answer questions about your todo list
+- Interact with the actual Supabase database using AI tool calling
+
+⚡ Real-Time Updates
+
+Using Supabase Realtime, the application automatically updates whenever the database changes.
+
+No page refresh is required.
+
+🎨 Modern UI
+
+- Responsive layout
+- Tailwind CSS
+- Shadcn UI components
+- Auto-scrolling AI chat
+- Typing indicator
+- AI suggestion buttons
+- Clear chat functionality
+
+---
+
+🛠️ Tech Stack
+
+Technology| Purpose
+TanStack Start| React Full-Stack Framework
+React 19| Frontend
+TypeScript| Type Safety
+Tailwind CSS| Styling
+Shadcn UI| UI Components
+TanStack Query| Server State Management
+TanStack AI| AI Integration
+Google Gemini| Large Language Model
+Supabase| Database & Backend
+Supabase Realtime| Live Database Updates
+
+---
+
+📁 Project Structure
+
+src/
+│
+├── ai/
+│   ├── prompts/
+│   │   └── systemPrompt.ts
+│   │
+│   └── tools/
+│       ├── createTodo.ts
+│       ├── deleteTodo.ts
+│       ├── getTodos.ts
+│       └── updateTodo.ts
+│
+├── components/
+│   ├── AiChat.tsx
+│   ├── AiChatSession.tsx
+│   ├── AiSuggestions.tsx
+│   ├── ChatMessage.tsx
+│   ├── TypingIndicator.tsx
+│   └── TodoList.tsx
+│
+├── hooks/
+│   ├── useAIChat.ts
+│   └── useTodos.ts
+│
+├── lib/
+│   └── supabase.ts
+│
+├── routes/
+│   └── api/
+│       └── chat.ts
+│
+└── server/
+    └── todo.service.ts
+
+---
+
+🗄️ Database
+
+The project uses Supabase.
+
+Table
+
+todos
+
+Columns
+
+- id
+- title
+- description
+- priority
+- is_completed
+- created_at
+
+---
+
+🔄 AI Workflow
+
+User
+   │
+   ▼
+AI Chat
+   │
+   ▼
+TanStack AI
+   │
+   ▼
+Google Gemini
+   │
+   ▼
+AI Tool Calling
+   │
+   ▼
+Supabase
+   │
+   ▼
+Realtime Update
+   │
+   ▼
+React UI
+
+---
+
+🚀 Installation
+
+Clone the repository
+
+git clone <repository-url>
+
+Install dependencies
+
 npm install
+
+Create a ".env" file
+
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+GEMINI_API_KEY=your_gemini_api_key
+
+Start the development server
+
 npm run dev
-```
 
-# Building For Production
+Open
 
-To build this application for production:
+http://localhost:3000
 
-```bash
-npm run build
-```
+---
 
-## Testing
+🔑 Environment Variables
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+Variable| Description
+VITE_SUPABASE_URL| Supabase Project URL
+VITE_SUPABASE_ANON_KEY| Supabase Anonymous Key
+GEMINI_API_KEY| Google Gemini API Key
 
-```bash
-npm run test
-```
+---
 
-## Styling
+🤖 AI Capabilities
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+The AI assistant can understand natural language such as:
 
-### Removing Tailwind CSS
+Create a task called Buy Milk.
 
-If you prefer not to use Tailwind CSS:
+Create a High priority task called Finish Thesis.
 
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `npm install @tailwindcss/vite tailwindcss -D`
+Show all my tasks.
 
-## Linting & Formatting
+How many completed tasks do I have?
 
+Mark Database Project as completed.
 
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
+Delete Buy Milk.
 
-```bash
-npm run lint
-npm run format
-npm run check
-```
+The AI interacts with the database using TanStack AI Tool Calling, ensuring that responses reflect the current state of the user's actual todo list.
 
+---
 
-## Deploy with Nitro
+📚 Learning Objectives
 
-This project uses Nitro as a generic server adapter, so it can run on any Node-compatible host.
+This project demonstrates:
 
-```bash
-npm run build
-node dist/server/index.mjs
-```
+- RESTful API interaction through Supabase
+- CRUD operations
+- AI integration using TanStack AI
+- Google Gemini integration
+- Tool Calling with AI
+- Real-time database synchronization
+- Modern React development
+- State management using TanStack Query
+- Component-based UI development
 
-The build output is a self-contained Node server. To deploy, push the `dist/` directory to your host (Render, Fly.io, your own VPS, etc.) and run the server command above.
+---
 
-For host-specific presets (Vercel, Netlify, Cloudflare, AWS Lambda, etc.) and tuning, see https://v3.nitro.build/deploy.
+🔮 Future Improvements
 
+Possible future enhancements include:
 
-# TanStack Chat Application
+- User authentication with Supabase Auth
+- User-specific todo lists
+- Due dates and reminders
+- File attachments
+- AI task summaries
+- AI productivity insights
+- Task categories
+- Calendar integration
+- Dark mode
+- Mobile optimization
 
-Am example chat application built with TanStack Start, TanStack Store, and Claude AI.
+---
 
-## .env Updates
+👨‍💻 Author
 
-```env
-ANTHROPIC_API_KEY=your_anthropic_api_key
-```
+Developed as a learning project to explore:
 
-## ✨ Features
+- TanStack Start
+- Supabase
+- TanStack AI
+- Google Gemini
+- Modern React development
+- AI-powered web applications
 
-### AI Capabilities
-- 🤖 Powered by Claude 3.5 Sonnet 
-- 📝 Rich markdown formatting with syntax highlighting
-- 🎯 Customizable system prompts for tailored AI behavior
-- 🔄 Real-time message updates and streaming responses (coming soon)
-
-### User Experience
-- 🎨 Modern UI with Tailwind CSS and Lucide icons
-- 🔍 Conversation management and history
-- 🔐 Secure API key management
-- 📋 Markdown rendering with code highlighting
-
-### Technical Features
-- 📦 Centralized state management with TanStack Store
-- 🔌 Extensible architecture for multiple AI providers
-- 🛠️ TypeScript for type safety
-
-## Architecture
-
-### Tech Stack
-- **Frontend Framework**: TanStack Start
-- **Routing**: TanStack Router
-- **State Management**: TanStack Store
-- **Styling**: Tailwind CSS
-- **AI Integration**: Anthropic's Claude API
-
-## Shadcn
-
-Add components using the latest version of [Shadcn](https://ui.shadcn.com/).
-
-```bash
-pnpm dlx shadcn@latest add button
-```
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+---

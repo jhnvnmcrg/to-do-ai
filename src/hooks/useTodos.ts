@@ -1,74 +1,102 @@
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-
+import { useEffect } from 'react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { supabase } from '@/lib/supabase'
 import {
-    createTodo,
-    deleteTodo,
-    getTodos,
-    toggleTodo,
-    updateTodo
-} from '../server/todo.service';
+  createTodo,
+  deleteTodo,
+  getTodos,
+  toggleTodo,
+  updateTodo,
+} from '../server/todo.service'
 
 export function useTodos() {
-    return useQuery({
-        queryKey: ['todos'],
-        queryFn: getTodos
-    });
+  const queryClient = useQueryClient()
+
+  const query = useQuery({
+    queryKey: ['todos'],
+    queryFn: getTodos,
+  })
+
+  useEffect(() => {
+    const channel = supabase
+      .channel('todos-realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'todos',
+        },
+        () => {
+          queryClient.invalidateQueries({
+            queryKey: ['todos'],
+          })
+        },
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [queryClient])
+
+  return query
 }
 
 export function useCreateTodo() {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
-    return useMutation({
-        mutationFn: createTodo,
+  return useMutation({
+    mutationFn: createTodo,
 
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['todos']
-            });
-        }
-    });
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['todos'],
+      })
+    },
+  })
 }
 
 export function useUpdateTodo() {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
-    return useMutation({
-        mutationFn: ({ id, updates }: { id: string; updates: any }) =>
-            updateTodo(id, updates),
+  return useMutation({
+    mutationFn: ({ id, updates }: { id: string; updates: any }) =>
+      updateTodo(id, updates),
 
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['todos']
-            });
-        }
-    });
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['todos'],
+      })
+    },
+  })
 }
 
 export function useDeleteTodo() {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
-    return useMutation({
-        mutationFn: deleteTodo,
+  return useMutation({
+    mutationFn: deleteTodo,
 
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['todos']
-            });
-        }
-    });
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['todos'],
+      })
+    },
+  })
 }
 
 export function useToggleTodo() {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
-    return useMutation({
-        mutationFn: ({ id, completed }: { id: string; completed: boolean }) =>
-            toggleTodo(id, completed),
+  return useMutation({
+    mutationFn: ({ id, completed }: { id: string; completed: boolean }) =>
+      toggleTodo(id, completed),
 
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['todos']
-            });
-        }
-    });
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['todos'],
+      })
+    },
+  })
 }
